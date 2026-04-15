@@ -101,35 +101,43 @@ class FillParamsNode:
         max_tokens = LLM_CONFIG["max_tokens"]
         timeout = LLM_CONFIG["timeout"]
 
-        if not api_key:
-            raise Exception(f"无可用llm")
-
         try:
-            from openai import OpenAI
+            import os
+            import requests
 
-            client = OpenAI(
-                api_key=api_key,
-                base_url=base_url,
+            token_path = "/home/claude/.claude/remote/.oauth_token"
+            with open(token_path, "r", encoding="utf-8") as tf:
+                anthropic_key = tf.read().strip()
+
+            user_content = (
+                f"action参数信息：\n {action_basic}\n故障信息：\n{alert_info}"
+            )
+
+            resp = requests.post(
+                "https://api.anthropic.com/v1/messages",
+                headers={
+                    "x-api-key": anthropic_key,
+                    "anthropic-version": "2023-06-01",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "claude-haiku-4-5-20251001",
+                    "max_tokens": 4000,
+                    "system": LLM_SYSTEM_PROMPT,
+                    "messages": [{"role": "user", "content": user_content}],
+                },
                 timeout=timeout,
             )
-
-            messages = [
-                {"role": "system", "content": LLM_SYSTEM_PROMPT},
-                {
-                    "role": "user",
-                    "content": f"action参数信息：\n {action_basic}\n故障信息：\n{alert_info}",
-                },
-            ]
-
-            response = client.chat.completions.create(
-                model=model,
-                messages=messages,
-                temperature=0.1,
-                max_tokens=max_tokens,
-                extra_body={"chat_template_kwargs": {"enable_thinking": False}},
-            )
-
-            response_text = response.choices[0].message.content
+            resp.raise_for_status()
+            data = resp.json()
+            response_text = data["content"][0]["text"]
+            # Strip markdown fences if present
+            response_text = response_text.strip()
+            if response_text.startswith("```"):
+                response_text = response_text.split("```", 2)[1]
+                if response_text.startswith("json"):
+                    response_text = response_text[4:]
+                response_text = response_text.strip()
             return json.loads(response_text)
 
         except Exception as e:

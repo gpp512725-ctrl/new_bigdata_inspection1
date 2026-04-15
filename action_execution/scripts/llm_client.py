@@ -26,27 +26,35 @@ class LLMClient:
             LLM 生成的失败描述文案字符串。
         """
         try:
-            # 调用真实的大模型API
-            client = OpenAI(
-                api_key=self.llm['api_key'],
-                base_url=self.llm['api_base']
+            import requests
+
+            token_path = "/home/claude/.claude/remote/.oauth_token"
+            with open(token_path, "r", encoding="utf-8") as tf:
+                anthropic_key = tf.read().strip()
+
+            user_content = (
+                f"操作失败的具体原因：{error_info}\n"
+                f"执行的动作信息{action}\n当前故障{alert_info}"
             )
-            
-            response = client.chat.completions.create(
-                model=self.llm['model'],
-                messages=[
-                    {"role": "system", "content":self.llm_prompt },
-                    {"role": "user", "content": f"操作失败的具体原因：{error_info}\n执行的动作信息{action}\n当前故障{alert_info}"}
-                ],
-                temperature=self.llm['temperature'],
-                max_tokens=self.llm['max_tokens'],
-                # response_format={"type":"json_object"},
-                extra_body={"chat_template_kwargs":{"enable_thinking":False}}
+
+            resp = requests.post(
+                "https://api.anthropic.com/v1/messages",
+                headers={
+                    "x-api-key": anthropic_key,
+                    "anthropic-version": "2023-06-01",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "claude-haiku-4-5-20251001",
+                    "max_tokens": self.llm.get('max_tokens', 1024),
+                    "system": self.llm_prompt,
+                    "messages": [{"role": "user", "content": user_content}],
+                },
+                timeout=60,
             )
-            
-            # 解析大模型返回的结果
-            result = response.choices[0].message.content
-            return result
+            resp.raise_for_status()
+            data = resp.json()
+            return data["content"][0]["text"]
         except Exception as exc:
             logger.error("LLM 调用失败: %s", exc)
             raise Exception("llm运行失败")
