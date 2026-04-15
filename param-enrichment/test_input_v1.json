@@ -1,0 +1,63 @@
+{
+    "alertInfo": { },
+    "action_names": [
+      "重启HDFS服务",
+      "扩容NN堆内存"
+    ],
+    "actionBasics": [
+      {
+        "action_des": "增加-Xmx值，适用于内存不足场景",
+        "action_tag": "",
+        "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+        "tool_name_cn": "扩容NN堆内存",
+        "tool_name_en": "namenode_heap_memory_expand",
+        "action_priority": "高"
+      },
+      {
+        "action_des": "重启namenode，适用于进程异常退出、修改参数后重启以生效等场景",
+        "action_tag": "",
+        "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+        "tool_name_cn": "重启HDFS服务",
+        "tool_name_en": "hdfs_restart",
+        "action_priority": "低"
+      }
+    ],
+    "abnormalInstances": [
+      {
+        "ip": "192.168.10.178",
+        "entity_name": "node",
+        "instance_id": "yes-bigdata-self-hadoop-2:9100",
+        "feature_code": "Host_Memory_Usage_Rate"
+      },
+      {
+        "ip": "192.168.10.177",
+        "entity_name": "namenode",
+        "instance_id": "yes-bigdata-self-hadoop-1:27001",
+        "feature_code": "Hadoop_NameNode_NonDfsUsedSpace"
+      },
+      {
+        "ip": "192.168.10.178",
+        "entity_name": "namenode",
+        "instance_id": "yes-bigdata-self-hadoop-2:27001",
+        "feature_code": "Hadoop_NameNode_NonDfsUsedSpace"
+      },
+      {
+        "ip": "192.168.10.177",
+        "entity_name": "namenode",
+        "instance_id": "yes-bigdata-self-hadoop-1:27001",
+        "feature_code": "NameNode_Heap_Memory_Usage_Rate"
+      },
+      {
+        "ip": "192.168.10.178",
+        "entity_name": "namenode",
+        "instance_id": "yes-bigdata-self-hadoop-2:27001",
+        "feature_code": "NameNode_Heap_Memory_Usage_Rate"
+      },
+      {
+        "ip": "192.168.10.177",
+        "entity_name": "namenode",
+        "instance_id": "yes-bigdata-self-hadoop-1:27001",
+        "feature_code": "Hadoop_NameNode_GcTimeMillis"
+      }
+    ]
+  }
