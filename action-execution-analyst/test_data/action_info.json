@@ -1,0 +1,25 @@
+{
+  "action_names": ["重启 HDFS 服务", "扩容 NN 堆内存"],
+  "actionBasics": [
+    {
+      "action_name": "重启 HDFS 服务",
+      "action_type": "service_restart",
+      "target_component": "HDFS",
+      "description": "重启 HDFS 相关服务以应用配置变更"
+    },
+    {
+      "action_name": "扩容 NN 堆内存",
+      "action_type": "config_change",
+      "target_component": "NameNode",
+      "description": "增加 NameNode 堆内存配置"
+    }
+  ],
+  "abnormalInstances": [
+    {
+      "instance_id": "nn-001",
+      "feature_codes": ["heap_usage_high", "gc_time_long"],
+      "status": "abnormal"
+    }
+  ],
+  "alertInfo": null
+}

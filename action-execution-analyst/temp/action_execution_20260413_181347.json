@@ -1,0 +1,191 @@
+{
+  "alertInfo": {},
+  "action_names": [
+    "重启HDFS服务",
+    "扩容NN堆内存"
+  ],
+  "actionBasics": [
+    {
+      "action_des": "增加-Xmx值，适用于内存不足场景",
+      "action_tag": "",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "tool_name_cn": "扩容NN堆内存",
+      "tool_name_en": "namenode_heap_memory_expand",
+      "action_priority": "高"
+    },
+    {
+      "action_des": "重启namenode，适用于进程异常退出、修改参数后重启以生效等场景",
+      "action_tag": "",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "tool_name_cn": "重启HDFS服务",
+      "tool_name_en": "hdfs_restart",
+      "action_priority": "低"
+    }
+  ],
+  "abnormalInstances": [
+    {
+      "ip": "192.168.10.178",
+      "entity_name": "node",
+      "instance_id": "yes-bigdata-self-hadoop-2:9100",
+      "feature_code": "Host_Memory_Usage_Rate"
+    },
+    {
+      "ip": "192.168.10.177",
+      "entity_name": "namenode",
+      "instance_id": "yes-bigdata-self-hadoop-1:27001",
+      "feature_code": "Hadoop_NameNode_NonDfsUsedSpace"
+    },
+    {
+      "ip": "192.168.10.178",
+      "entity_name": "namenode",
+      "instance_id": "yes-bigdata-self-hadoop-2:27001",
+      "feature_code": "Hadoop_NameNode_NonDfsUsedSpace"
+    },
+    {
+      "ip": "192.168.10.177",
+      "entity_name": "namenode",
+      "instance_id": "yes-bigdata-self-hadoop-1:27001",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate"
+    },
+    {
+      "ip": "192.168.10.178",
+      "entity_name": "namenode",
+      "instance_id": "yes-bigdata-self-hadoop-2:27001",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate"
+    },
+    {
+      "ip": "192.168.10.177",
+      "entity_name": "namenode",
+      "instance_id": "yes-bigdata-self-hadoop-1:27001",
+      "feature_code": "Hadoop_NameNode_GcTimeMillis"
+    }
+  ],
+  "actions": [
+    {
+      "data": {
+        "ip": "192.168.10.177",
+        "actionName": "重启 HDFS 服务",
+        "commandType": "restart",
+        "serviceRole": "NameNode"
+      },
+      "tool_name_cn": "重启 HDFS 服务",
+      "tool_name_en": "hdfs_restart",
+      "action_des": "重启 namenode，适用于进程异常退出、修改参数后重启以生效等场景",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "instance_id": "yes-bigdata-self-hadoop-1:27001",
+      "action_priority": "低"
+    },
+    {
+      "data": {
+        "ip": "192.168.10.178",
+        "actionName": "重启 HDFS 服务",
+        "commandType": "restart",
+        "serviceRole": "NameNode"
+      },
+      "tool_name_cn": "重启 HDFS 服务",
+      "tool_name_en": "hdfs_restart",
+      "action_des": "重启 namenode，适用于进程异常退出、修改参数后重启以生效等场景",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "instance_id": "yes-bigdata-self-hadoop-2:27001",
+      "action_priority": "低"
+    },
+    {
+      "data": {
+        "value": "4"
+      },
+      "tool_name_cn": "扩容 NN 堆内存",
+      "tool_name_en": "namenode_heap_memory_expand",
+      "action_des": "增加-Xmx 值，适用于内存不足场景",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "instance_id": "yes-bigdata-self-hadoop-1:27001",
+      "action_priority": "高"
+    },
+    {
+      "data": {
+        "value": "4"
+      },
+      "tool_name_cn": "扩容 NN 堆内存",
+      "tool_name_en": "namenode_heap_memory_expand",
+      "action_des": "增加-Xmx 值，适用于内存不足场景",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "instance_id": "yes-bigdata-self-hadoop-2:27001",
+      "action_priority": "高"
+    }
+  ],
+  "action_basics": [
+    {
+      "action_des": "增加-Xmx值，适用于内存不足场景",
+      "action_tag": "",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "tool_name_cn": "扩容NN堆内存",
+      "tool_name_en": "namenode_heap_memory_expand",
+      "action_priority": "高",
+      "extra_info": [
+        {
+          "instance_id": "yes-bigdata-self-hadoop-1:27001",
+          "ip": "192.168.10.177"
+        },
+        {
+          "instance_id": "yes-bigdata-self-hadoop-2:27001",
+          "ip": "192.168.10.178"
+        }
+      ]
+    },
+    {
+      "action_des": "重启namenode，适用于进程异常退出、修改参数后重启以生效等场景",
+      "action_tag": "",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "tool_name_cn": "重启HDFS服务",
+      "tool_name_en": "hdfs_restart",
+      "action_priority": "低",
+      "extra_info": [
+        {
+          "instance_id": "yes-bigdata-self-hadoop-1:27001",
+          "ip": "192.168.10.177"
+        },
+        {
+          "instance_id": "yes-bigdata-self-hadoop-2:27001",
+          "ip": "192.168.10.178"
+        }
+      ]
+    }
+  ],
+  "action_res": [
+    {
+      "tool_name_cn": "重启 HDFS 服务",
+      "instance_id": "yes-bigdata-self-hadoop-1:27001",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "execute_time": "2026-04-13 18:16:51",
+      "action_des": "重启 namenode，适用于进程异常退出、修改参数后重启以生效等场景",
+      "code": 0,
+      "action_msg": "抱歉，非人工重启 HDFS 服务动作执行失败（已多次重试）。\n\n失败原因有：系统接口返回 400 错误，提示操作失败。\n\n无法定位失败原因，可能原因有：1. 服务进程有残留导致端口占用；2. 配置文件存在语法错误；3. 服务器资源不足导致启动超时。\n\n建议您登录 192.168.10.177 检查 NameNode 进程状态及日志，确认无冲突后手动尝试重启。"
+    },
+    {
+      "tool_name_cn": "重启 HDFS 服务",
+      "instance_id": "yes-bigdata-self-hadoop-2:27001",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "execute_time": "2026-04-13 18:16:51",
+      "action_des": "重启 namenode，适用于进程异常退出、修改参数后重启以生效等场景",
+      "code": 1,
+      "action_msg": "重启 HDFS 服务为MCP执行，且执行成功"
+    },
+    {
+      "tool_name_cn": "扩容 NN 堆内存",
+      "instance_id": "yes-bigdata-self-hadoop-1:27001",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "execute_time": "2026-04-13 18:17:38",
+      "action_des": "增加-Xmx 值，适用于内存不足场景",
+      "code": 0,
+      "action_msg": "抱歉，非人工扩容 NN 堆内存动作执行失败（已多次重试）。\n\n无法定位失败原因，可能原因有：\n1. 机器剩余物理内存不足，无法分配更多堆内存。\n2. 配置的 -Xmx 参数值不合理，超出了系统允许的最大限制。\n3. NameNode 服务当前状态异常，导致配置下发被拒绝。\n\n建议您人工排查与纠正：\n1. 检查实例 yes-bigdata-self-hadoop-1:27001 的内存使用率，确保有足够剩余资源。\n2. 核对扩容参数值是否符合规范，避免设置过大。\n3. 查看服务日志确认具体报错信息，排除服务锁定或权限问题。"
+    },
+    {
+      "tool_name_cn": "扩容 NN 堆内存",
+      "instance_id": "yes-bigdata-self-hadoop-2:27001",
+      "feature_code": "NameNode_Heap_Memory_Usage_Rate",
+      "execute_time": "2026-04-13 18:17:38",
+      "action_des": "增加-Xmx 值，适用于内存不足场景",
+      "code": 1,
+      "action_msg": "扩容 NN 堆内存为MCP执行，且执行成功"
+    }
+  ]
+}
